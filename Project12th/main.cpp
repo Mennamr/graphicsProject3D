@@ -180,6 +180,19 @@ void reshapeFunc (int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }
 
+void idleFunc (void)
+{
+    //zRotated += 1;
+    if(approach<7){
+        approach+=0.08;
+    }
+
+
+
+
+    //angle+=0.5;
+    glutPostRedisplay();
+}
 //------------------------------  display   -------------------------------
 int zRotated=0;
 void display (void)
@@ -216,13 +229,11 @@ void display (void)
     glPopMatrix();
 
     glPushMatrix();
-        glTranslatef(Tx,Ty,approach);
+        glTranslatef(0,0,approach);
         ghost();
     glPopMatrix();
-    while(approach<6){
-    approach+=0.1;
-    }
-    glFlush();
+
+    //glFlush();
 
 
     glutSwapBuffers();
@@ -230,13 +241,7 @@ void display (void)
 
 //--------------------------------  idleFunc  ----------------------------------
 
-void idleFunc (void)
-{
-    zRotated += 1;
 
-    //angle+=0.5;
-    glutPostRedisplay();
-}
 
 void texture (void){
 
@@ -289,7 +294,12 @@ void keyEvent(int key, int x, int y){
     }
 
 }
+/*void timer(int){
+    glutPostRedisplay();
+    glutTimerFunc(1000/60,timer,0);
 
+
+}*/
 //----------------------------------  main  ------------------------------------
 
 
@@ -308,6 +318,7 @@ int main (int argc, char **argv)
     glutSpecialFunc(keyEvent);
     glutReshapeFunc (reshapeFunc);
     glutIdleFunc    (idleFunc);
+    //glutTimerFunc(1000,timer,0);
 
     glClearColor(1,1,1,1);
     texture();

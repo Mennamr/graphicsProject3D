@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1672777109 source:d:\term 5 menna\graphics\project12th\main.cpp
+1672783790 source:d:\term 5 menna\graphics\project12th\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
