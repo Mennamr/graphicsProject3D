@@ -14,24 +14,26 @@ bool Rz=0;
 float Ty=0;
 float Tx=0;
 float Tz=0;
+float approach=0;
 
 void donut(){
-        glColor3f(0.1,0.1,0.2);
+        //plain donut
+        glColor3f(0.87,0.596,0.317);
         glRotatef(130+angle,1,0,0);
         glutSolidTorus(0.09,0.18,30,30);
 
-        //green donut
-        glColor3f(0,1,0);
+        //white chocolate donut
+        glColor3f(1,1,0.7);
         glTranslatef(1,0,0);
         glutSolidTorus(0.09,0.18,30,30);
 
-        //blue donut
-        glColor3f(0,0,0.6);
+        //blueberry donut
+        glColor3f(0.8,0.5,1);
         glTranslatef(1,0,0);
         glutSolidTorus(0.09,0.18,30,30);
 
-        //dark green donut
-        glColor3f(0,0.2,0);
+        //chocolate donut
+        glColor3f(0.6,0.4,0.2);
         glTranslatef(1,0,0);
         glutSolidTorus(0.09,0.18,30,30);
 }
@@ -91,84 +93,81 @@ void table(){
       glVertex3f(cx, -cy, -1.0f);
    glEnd();  // End of drawing color-cube
 }
-void tarte(){
-    glRotatef(angle,Rx,Ry,Rz);
+void pieceOfCake(){
+    //glRotatef(angle,Rx,Ry,Rz);
+    float c=0.18;
 
-    // Front
+    // Front black
     glBegin(GL_TRIANGLES);
-
-      glColor3f(1.0f, 0.0f, 0.0f);     // Red
-      glColor3f(0,0,0);
-      glVertex3f( 0.0f, 1.0f, 1.0f);
-      glColor3f(0.0f, 1.0f, 0.0f);     // Green
-      glVertex3f(-1.0f, -1.0f, 1.0f);
-      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-      glVertex3f(1.0f, -1.0f, 1.0f);
-
+      glColor3f(1,0.7,0);
+      glVertex3f( 0, c, c);
+      glVertex3f(-c, -c, c);
+      glVertex3f(c, -c, c);
     glEnd();
 
 
-    // Right
+    // Right green
     glBegin(GL_QUADS);
-
-      glColor3f(1.0f, 0.0f, 0.0f);     // Red
-      glVertex3f(0.0f, 1.0f, 1.0f);
-      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-      glVertex3f(1.0f, -1.0f, 1.0f);
-      glColor3f(0.0f, 1.0f, 0.0f);     // Green
-      glVertex3f(1.0f, -1.0f, -1.0f);
-      glColor3f(0,0.8,0);
-      glVertex3f(0.0f, 1.0f, -1.0f);
-
+      glColor3f(0.9, 0.4, 0.0);     // Red
+      glVertex3f(0, c, c);
+      glVertex3f(c, -c, c);
+      glVertex3f(c, -c, -c);
+      glVertex3f(0, c, -c);
     glEnd();
 
 
-// Back
-        glBegin(GL_TRIANGLES);
-
-      glColor3f(1.0f, 0.0f, 0.0f);     // Red
-      glVertex3f(0.0f, 1.0f, -1.0f);
-      glColor3f(0.0f, 1.0f, 0.0f);     // Green
-      glVertex3f(1.0f, -1.0f, -1.0f);
-      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-      glVertex3f(-1.0f, -1.0f, -1.0f);
-
+// Back blue
+    glBegin(GL_TRIANGLES);
+      glColor3f(1,1,1);    // Red
+      glVertex3f(0, c, -c);
+      glVertex3f(c, -c, -c);
+      glVertex3f(-c, -c, -c);
     glEnd();
 
 
-    // Left
+    // Left yellow
     glBegin(GL_QUADS);
-
-      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-      glVertex3f(-1, -1, 1);
-
-      glColor3f(0.0f, 1.0f, 0.0f);     // Green
-      glVertex3f( 0.0f, 1.0f, 1.0f);
-
-      glColor3f(1,1,0);               //
-      glVertex3f(0, 1, -1);
-
-      glColor3f(1.0f, 0.0f, 0.0f);     // Red
-      glVertex3f(-1.0f, -1.0f, -1.0f);
-
+      glColor3f(0.9, 0.4, 0.0);     // Blue
+      glVertex3f(-c, -c, c);
+      glVertex3f( 0, c, c);
+      glVertex3f(0, c, -c);
+      glVertex3f(-c, -c, -c);
    glEnd();
 
 
-    //bottom
+    //bottom pink
    glBegin(GL_QUADS);
-
-      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-      glVertex3f(1.0f, -1.0f, 1.0f);
-
-      glColor3f(0.0f, 1.0f, 0.0f);     // Green
-      glVertex3f(-1.0f, -1.0f, 1.0f);
-
-      glColor3f(1,1,0);               //
-      glVertex3f(-1.0f, -1.0f, -1.0f);
-
-      glColor3f(1.0f, 0.0f, 0.0f);     // Red
-      glVertex3f(1.0f, -1.0f, -1.0f);
+      glColor3f(1, 0.5, 0.1);     // Blue
+      glVertex3f(c, -c, c);
+      glVertex3f(-c, -c, c);
+      glVertex3f(-c, -c, -c);
+      glVertex3f(c, -c, -c);
    glEnd();
+
+
+}
+void ghost(){
+    glTranslated(0,0,-5);
+    glColor3f(1,1,1);
+    glRotatef(angle,1,0,0);
+    //glutSolidCube(2);
+    glutSolidSphere(1,30,30);
+    glTranslatef(0,-1,-0.65);
+    glutSolidCube(2);
+    glColor3f(0,0,0);
+
+    //right eye
+    glTranslatef(0.3,1.4,1.6);
+    glutSolidSphere(0.18,30,30);
+
+    //left eye
+    glTranslatef(-0.47,0,0.01);
+    glutSolidSphere(0.18,30,30);
+
+    //mouth
+    glColor3f(0.8,0,0);
+    glTranslatef(0.2,-0.6,-0.1);
+    glutSolidSphere(0.2,30,30);
 
 
 }
@@ -190,7 +189,7 @@ void display (void)
     glLoadIdentity ();
     glTranslatef    (0.0, 0.0, -15.0);
 
-/*
+
     //table (parallelepipede rectangle)
     glPushMatrix();
         glTranslatef(0,-2.5,4);
@@ -199,47 +198,30 @@ void display (void)
 
     //Donuts (torus)
     glPushMatrix();
-        glTranslatef(2.5,-3.5,4);
+        glTranslatef(2.8,-3.5,4);
         glTranslatef(-4.8,2.3,2);
         donut();
     glPopMatrix();
 
-*/
+
     //Tarte (triangle with rectangular sides)
     glPushMatrix();
-        tarte();
+
+        glTranslatef(2.2,-1,6.5);
+        glRotatef(290,1,0,0);
+        glRotatef(40,0,0,1);
+        pieceOfCake();
+        glTranslatef(-0.6+Tx,0,0);
+        pieceOfCake();
     glPopMatrix();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //glColor3f (0.1, 0.2, 0.8);              // Blue ball displaced to right.
-    /*glPushMatrix ();
-       glTranslatef    (1.5, 0.0, 0.0);
-       glRotatef       (60.0, 1,0,0);
-       glRotatef       (zRotated, 0,0,1);
-       glutSolidSphere (1.0, 5, 30);
-    glPopMatrix ();
-
-
-    glPushMatrix ();
-       glTranslatef    (1.8, 0.0, 0.0);
-       glRotatef(angle,Rx,Ry,0);
-       glutWireTeapot(2);
-    glPopMatrix ();*/
-
+    glPushMatrix();
+        glTranslatef(Tx,Ty,approach);
+        ghost();
+    glPopMatrix();
+    while(approach<6){
+    approach+=0.1;
+    }
     glFlush();
 
 
@@ -251,6 +233,7 @@ void display (void)
 void idleFunc (void)
 {
     zRotated += 1;
+
     //angle+=0.5;
     glutPostRedisplay();
 }
@@ -292,17 +275,17 @@ const GLfloat high_shininess[] = { 100.0f };
 }
 void keyEvent(int key, int x, int y){
     if(key==GLUT_KEY_UP){
-            angle-=5;
+            angle+=5;
 
     }
     if(key==GLUT_KEY_RIGHT){
-        Rz=1;
+        Tz+=0.2;
     }
     if(key==GLUT_KEY_LEFT){
-        Rx=1;
+        Tx+=0.2;
     }
     if(key==GLUT_KEY_DOWN){
-        Ry=1;
+        Ty+=0.2;
     }
 
 }
