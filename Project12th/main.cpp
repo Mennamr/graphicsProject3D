@@ -10,11 +10,11 @@
 float angle=0;
 bool Rx=0;
 bool Ry=0;
+bool Rz=0;
 float Ty=0;
 float Tx=0;
 float Tz=0;
 
-//------------------------------  reshapeFunc  ---------------------------------
 void donut(){
         glColor3f(0.1,0.1,0.2);
         glRotatef(130+angle,1,0,0);
@@ -92,6 +92,84 @@ void table(){
    glEnd();  // End of drawing color-cube
 }
 void tarte(){
+    glRotatef(angle,Rx,Ry,Rz);
+
+    // Front
+    glBegin(GL_TRIANGLES);
+
+      glColor3f(1.0f, 0.0f, 0.0f);     // Red
+      glColor3f(0,0,0);
+      glVertex3f( 0.0f, 1.0f, 1.0f);
+      glColor3f(0.0f, 1.0f, 0.0f);     // Green
+      glVertex3f(-1.0f, -1.0f, 1.0f);
+      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+      glVertex3f(1.0f, -1.0f, 1.0f);
+
+    glEnd();
+
+
+    // Right
+    glBegin(GL_QUADS);
+
+      glColor3f(1.0f, 0.0f, 0.0f);     // Red
+      glVertex3f(0.0f, 1.0f, 1.0f);
+      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+      glVertex3f(1.0f, -1.0f, 1.0f);
+      glColor3f(0.0f, 1.0f, 0.0f);     // Green
+      glVertex3f(1.0f, -1.0f, -1.0f);
+      glColor3f(0,0.8,0);
+      glVertex3f(0.0f, 1.0f, -1.0f);
+
+    glEnd();
+
+
+// Back
+        glBegin(GL_TRIANGLES);
+
+      glColor3f(1.0f, 0.0f, 0.0f);     // Red
+      glVertex3f(0.0f, 1.0f, -1.0f);
+      glColor3f(0.0f, 1.0f, 0.0f);     // Green
+      glVertex3f(1.0f, -1.0f, -1.0f);
+      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+      glVertex3f(-1.0f, -1.0f, -1.0f);
+
+    glEnd();
+
+
+    // Left
+    glBegin(GL_QUADS);
+
+      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+      glVertex3f(-1, -1, 1);
+
+      glColor3f(0.0f, 1.0f, 0.0f);     // Green
+      glVertex3f( 0.0f, 1.0f, 1.0f);
+
+      glColor3f(1,1,0);               //
+      glVertex3f(0, 1, -1);
+
+      glColor3f(1.0f, 0.0f, 0.0f);     // Red
+      glVertex3f(-1.0f, -1.0f, -1.0f);
+
+   glEnd();
+
+
+    //bottom
+   glBegin(GL_QUADS);
+
+      glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+      glVertex3f(1.0f, -1.0f, 1.0f);
+
+      glColor3f(0.0f, 1.0f, 0.0f);     // Green
+      glVertex3f(-1.0f, -1.0f, 1.0f);
+
+      glColor3f(1,1,0);               //
+      glVertex3f(-1.0f, -1.0f, -1.0f);
+
+      glColor3f(1.0f, 0.0f, 0.0f);     // Red
+      glVertex3f(1.0f, -1.0f, -1.0f);
+   glEnd();
+
 
 }
 void reshapeFunc (int w, int h)
@@ -112,19 +190,37 @@ void display (void)
     glLoadIdentity ();
     glTranslatef    (0.0, 0.0, -15.0);
 
-
+/*
     //table (parallelepipede rectangle)
     glPushMatrix();
         glTranslatef(0,-2.5,4);
         table();
     glPopMatrix();
 
-    //Donuts
+    //Donuts (torus)
     glPushMatrix();
         glTranslatef(2.5,-3.5,4);
         glTranslatef(-4.8,2.3,2);
         donut();
     glPopMatrix();
+
+*/
+    //Tarte (triangle with rectangular sides)
+    glPushMatrix();
+        tarte();
+    glPopMatrix();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -196,17 +292,17 @@ const GLfloat high_shininess[] = { 100.0f };
 }
 void keyEvent(int key, int x, int y){
     if(key==GLUT_KEY_UP){
-            angle+=5;
+            angle-=5;
 
     }
     if(key==GLUT_KEY_RIGHT){
-        Tz+=0.1;
+        Rz=1;
     }
     if(key==GLUT_KEY_LEFT){
-        Tx-=0.1;
+        Rx=1;
     }
     if(key==GLUT_KEY_DOWN){
-        Ty+=0.1;
+        Ry=1;
     }
 
 }
