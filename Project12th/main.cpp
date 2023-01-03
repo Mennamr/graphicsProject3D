@@ -251,7 +251,11 @@ void display (void)
         pieceOfCake();
     glPopMatrix();
 
-
+    glPushMatrix();
+        glTranslatef(0.9,-0.4,10);
+        glColor3f(1,1,0);
+        glutSolidTeapot(0.2);
+    glPopMatrix();
 
     glPushMatrix();
         glTranslatef(away,0,approach);
