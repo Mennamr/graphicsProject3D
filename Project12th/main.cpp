@@ -7,14 +7,38 @@
 #include <math.h>
 
 
-float angle=15;
+float angle=0;
 bool Rx=0;
 bool Ry=0;
+float Ty=0;
+float Tx=0;
+float Tz=0;
+
 //------------------------------  reshapeFunc  ---------------------------------
+void donut(){
+        glColor3f(0.1,0.1,0.2);
+        glRotatef(130+angle,1,0,0);
+        glutSolidTorus(0.09,0.18,30,30);
+
+        //green donut
+        glColor3f(0,1,0);
+        glTranslatef(1,0,0);
+        glutSolidTorus(0.09,0.18,30,30);
+
+        //blue donut
+        glColor3f(0,0,0.6);
+        glTranslatef(1,0,0);
+        glutSolidTorus(0.09,0.18,30,30);
+
+        //dark green donut
+        glColor3f(0,0.2,0);
+        glTranslatef(1,0,0);
+        glutSolidTorus(0.09,0.18,30,30);
+}
 void table(){
     //glRotatef(125,1,0,0);
     glRotatef(280,1,0,0);
-    glRotatef(25,0,0,1);
+    glRotatef(0,0,0,1);
     float cx=3.5;
     float cy=1.5;
    glBegin(GL_QUADS);
@@ -67,9 +91,8 @@ void table(){
       glVertex3f(cx, -cy, -1.0f);
    glEnd();  // End of drawing color-cube
 }
-void donut(){
+void tarte(){
 
-    glutSolidTorus(2,4,2,2);
 }
 void reshapeFunc (int w, int h)
 {
@@ -92,18 +115,21 @@ void display (void)
 
     //table (parallelepipede rectangle)
     glPushMatrix();
-    glTranslatef(0.5,-2.5,5.5);
-    table();
+        glTranslatef(0,-2.5,4);
+        table();
     glPopMatrix();
 
     //Donuts
     glPushMatrix();
-    glTranslatef(0,8,0);
-    donut();
+        glTranslatef(2.5,-3.5,4);
+        glTranslatef(-4.8,2.3,2);
+        donut();
     glPopMatrix();
 
 
-    glColor3f (0.1, 0.2, 0.8);              // Blue ball displaced to right.
+
+
+    //glColor3f (0.1, 0.2, 0.8);              // Blue ball displaced to right.
     /*glPushMatrix ();
        glTranslatef    (1.5, 0.0, 0.0);
        glRotatef       (60.0, 1,0,0);
@@ -174,12 +200,13 @@ void keyEvent(int key, int x, int y){
 
     }
     if(key==GLUT_KEY_RIGHT){
-        Ry=0;
-        Rx=1;
+        Tz+=0.1;
     }
     if(key==GLUT_KEY_LEFT){
-        Ry=1;
-        Rx=0;
+        Tx-=0.1;
+    }
+    if(key==GLUT_KEY_DOWN){
+        Ty+=0.1;
     }
 
 }
