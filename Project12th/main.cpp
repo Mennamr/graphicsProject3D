@@ -1,12 +1,15 @@
+
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
 
 #include <stdlib.h>
 #include <windows.h>
-#include <math.h>
+#include<mmsystem.h>
 
 
+//ISoundEngine *SoundEngine = createIrrKlangDevice();
 float angle=0;
 bool Rx=0;
 bool Ry=0;
@@ -15,6 +18,8 @@ float Ty=0;
 float Tx=0;
 float Tz=0;
 float approach=0;
+float away=0;
+bool awayFlag=0;
 
 void donut(){
         //plain donut
@@ -27,15 +32,16 @@ void donut(){
         glTranslatef(1,0,0);
         glutSolidTorus(0.09,0.18,30,30);
 
-        //blueberry donut
-        glColor3f(0.8,0.5,1);
-        glTranslatef(1,0,0);
-        glutSolidTorus(0.09,0.18,30,30);
-
         //chocolate donut
         glColor3f(0.6,0.4,0.2);
-        glTranslatef(1,0,0);
+        glTranslatef(2+Tx,0,0);
         glutSolidTorus(0.09,0.18,30,30);
+
+         //blueberry donut
+        glColor3f(0.8,0.5,1);
+        glTranslatef(-1,0+Ty,0+Tz);
+        glutSolidTorus(0.09,0.18,30,30);
+
 }
 void table(){
     //glRotatef(125,1,0,0);
@@ -144,16 +150,24 @@ void pieceOfCake(){
       glVertex3f(c, -c, -c);
    glEnd();
 
-
 }
+
 void ghost(){
     glTranslated(0,0,-5);
     glColor3f(1,1,1);
     glRotatef(angle,1,0,0);
     //glutSolidCube(2);
+
+
+
     glutSolidSphere(1,30,30);
+
     glTranslatef(0,-1,-0.65);
+    glPushMatrix();
+    glTranslatef(0,0,-0.1);
     glutSolidCube(2);
+    glPopMatrix();
+
     glColor3f(0,0,0);
 
     //right eye
@@ -168,7 +182,6 @@ void ghost(){
     glColor3f(0.8,0,0);
     glTranslatef(0.2,-0.6,-0.1);
     glutSolidSphere(0.2,30,30);
-
 
 }
 void reshapeFunc (int w, int h)
@@ -186,7 +199,18 @@ void idleFunc (void)
     if(approach<7){
         approach+=0.08;
     }
+    if(Ty<-1.6){
+        Tz=5;
+        awayFlag=1;
+    }
 
+    if(awayFlag){
+        away-=0.02;
+        if(away<-3){
+            awayFlag=false;
+            //away=-5;
+        }
+    }
 
 
 
@@ -217,23 +241,24 @@ void display (void)
     glPopMatrix();
 
 
-    //Tarte (triangle with rectangular sides)
+    //piece of cake (triangle with rectangular sides)
     glPushMatrix();
-
         glTranslatef(2.2,-1,6.5);
         glRotatef(290,1,0,0);
         glRotatef(40,0,0,1);
         pieceOfCake();
-        glTranslatef(-0.6+Tx,0,0);
+        glTranslatef(-0.6,0,0);
         pieceOfCake();
     glPopMatrix();
 
+
+
     glPushMatrix();
-        glTranslatef(0,0,approach);
+        glTranslatef(away,0,approach);
         ghost();
     glPopMatrix();
 
-    //glFlush();
+    glFlush();
 
 
     glutSwapBuffers();
@@ -280,7 +305,7 @@ const GLfloat high_shininess[] = { 100.0f };
 }
 void keyEvent(int key, int x, int y){
     if(key==GLUT_KEY_UP){
-            angle+=5;
+            Ty-=0.2;
 
     }
     if(key==GLUT_KEY_RIGHT){
@@ -318,7 +343,8 @@ int main (int argc, char **argv)
     glutSpecialFunc(keyEvent);
     glutReshapeFunc (reshapeFunc);
     glutIdleFunc    (idleFunc);
-    //glutTimerFunc(1000,timer,0);
+
+   // PlaySound("falling.wav", NULL, SND_ASYNC|SND_FILENAME|SND_LOOP);
 
     glClearColor(1,1,1,1);
     texture();

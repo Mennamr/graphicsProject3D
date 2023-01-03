@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1672783790 source:d:\term 5 menna\graphics\project12th\main.cpp
+1672788957 source:d:\term 5 menna\graphics\project12th\main.cpp
 	<GL/gl.h>
 	<GL/glu.h>
 	<GL/glut.h>
 	<stdlib.h>
 	<windows.h>
-	<math.h>
+	<mmsystem.h>
 
 1669040498 c:\program files (x86)\codeblocks\mingw\include\gl\glut.h
 	<windows.h>
