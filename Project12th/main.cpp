@@ -16,12 +16,15 @@ bool Ry=0;
 bool Rz=0;
 float Ty=0;
 float Tx=0;
+float Tyy=0;
 float Tz=0;
 float approach=0;
 float away=0;
 bool awayFlag=0;
+bool hauntFlag=0;
 
 void donut(){
+        glTranslatef(0,0,0);
         //plain donut
         glColor3f(0.87,0.596,0.317);
         glRotatef(130,1,0,0);
@@ -199,20 +202,26 @@ void idleFunc (void)
         approach+=0.08;
     }
     if(Ty<-1.6){
-        Tz=5;
+        Tz=15;
         awayFlag=1;
     }
 
     if(awayFlag){
         away-=0.02;
-        if(away<-3){
+        if(away<-9){
             awayFlag=false;
+            hauntFlag=true;
             //away=-5;
         }
+        if(hauntFlag){
+            if(Tyy<2.5){
+            Tyy+=0.02;
+            }
+            else{
+                Tx-=0.02;
+            }
+        }
     }
-
-
-
 
     glutPostRedisplay();
 }
@@ -236,14 +245,14 @@ void display (void)
     //Donuts (torus)
     glPushMatrix();
         glTranslatef(2.8,-3.5,4);
-        glTranslatef(-4.8,2.3+Ty,2);
+        glTranslatef(-4.8+Tx,2.3+Tyy,2);
         donut();
     glPopMatrix();
 
 
     //piece of cake (triangle with rectangular sides)
     glPushMatrix();
-        glTranslatef(2.2,-1,6.5);
+        glTranslatef(2.2,-1.1,6.5);
         glRotatef(290,1,0,0);
         glRotatef(40,0,0,1);
         pieceOfCake();
@@ -254,7 +263,7 @@ void display (void)
 
     //teapot
     glPushMatrix();
-        glTranslatef(0.9,-0.4,10);
+        glTranslatef(1.1,-0.45,9.5);
         glColor3f(1,1,0);
         glutSolidTeapot(0.2);
     glPopMatrix();
@@ -312,15 +321,15 @@ void keyEvent(int key, int x, int y){
             Ty-=0.2;
 
     }
-    if(key==GLUT_KEY_RIGHT){
-        Tz+=0.2;
+   /* if(key==GLUT_KEY_RIGHT){
+        Tyy+=0.2;
     }
     if(key==GLUT_KEY_LEFT){
-        Tx+=0.2;
+        Tx-=0.2;
     }
     if(key==GLUT_KEY_DOWN){
         Ty+=0.2;
-    }
+    }*/
 
 }
 
