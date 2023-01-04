@@ -9,7 +9,7 @@
 #include<mmsystem.h>
 
 
-//ISoundEngine *SoundEngine = createIrrKlangDevice();
+
 float angle=0;
 bool Rx=0;
 bool Ry=0;
@@ -24,7 +24,7 @@ bool awayFlag=0;
 void donut(){
         //plain donut
         glColor3f(0.87,0.596,0.317);
-        glRotatef(130+angle,1,0,0);
+        glRotatef(130,1,0,0);
         glutSolidTorus(0.09,0.18,30,30);
 
         //white chocolate donut
@@ -34,7 +34,7 @@ void donut(){
 
         //chocolate donut
         glColor3f(0.6,0.4,0.2);
-        glTranslatef(2+Tx,0,0);
+        glTranslatef(2,0,0);
         glutSolidTorus(0.09,0.18,30,30);
 
          //blueberry donut
@@ -44,60 +44,60 @@ void donut(){
 
 }
 void table(){
-    //glRotatef(125,1,0,0);
+
     glRotatef(280,1,0,0);
     glRotatef(0,0,0,1);
     float cx=3.5;
     float cy=1.5;
+
+
    glBegin(GL_QUADS);
    glColor3f(0.84,0.596,0.3176); //light brown
    glColor3f(0.5,0.337,0.157); //dark brown
    glColor3f(0.62,0.412,0.2); //medium brown
-                 // Begin drawing the color cube with 6 quads
-      // Top face (y = 1.0f)
-      // Define vertices in counter-clockwise (CCW) order with normal pointing out
 
+      // Top
       glColor3f(0.62,0.412,0.2);
       glVertex3f( cx, cy, -1);
       glVertex3f(-cx, cy, -1);
       glVertex3f(-cx, cy,  1);
       glVertex3f( cx, cy,  1);
 
-      // Bottom face (y = -1.0f)
-      glColor3f(0.62,0.412,0.2) ;    // Orange
+      // Bottom
+      glColor3f(0.62,0.412,0.2) ;
       glVertex3f( cx, -cy,  1);
       glVertex3f(-cx, -cy,  1);
       glVertex3f(-cx, -cy, -1);
       glVertex3f( cx, -cy, -1);
 
-      // Front face  (z = 1.0f)
-      glColor3f(0.84,0.596,0.3176);// Red
+      // Front
+      glColor3f(0.84,0.596,0.3176);
       glVertex3f( cx,  cy, 1);
       glVertex3f(-cx,  cy, 1);
       glVertex3f(-cx, -cy, 1);
       glVertex3f( cx, -cy, 1);
 
-      // Back face (z = -1.0f)
-      glColor3f(0.84,0.596,0.3176);     // Yellow
-      glVertex3f( cx, -cy, -1.0f);
-      glVertex3f(-cx, -cy, -1.0f);
-      glVertex3f(-cx,  cy, -1.0f);
-      glVertex3f( cx,  cy, -1.0f);
+      // Back
+      glColor3f(0.84,0.596,0.3176);
+      glVertex3f( cx, -cy, -1);
+      glVertex3f(-cx, -cy, -1);
+      glVertex3f(-cx,  cy, -1);
+      glVertex3f( cx,  cy, -1);
 
-      // Left face (x = -1.0f)
-      glColor3f(0.5,0.337,0.157);// Blue
-      glVertex3f(-cx,  cy,  1.0f);
-      glVertex3f(-cx,  cy, -1.0f);
-      glVertex3f(-cx, -cy, -1.0f);
-      glVertex3f(-cx, -cy,  1.0f);
+      // Left
+      glColor3f(0.5,0.337,0.157);
+      glVertex3f(-cx,  cy,  1);
+      glVertex3f(-cx,  cy, -1);
+      glVertex3f(-cx, -cy, -1);
+      glVertex3f(-cx, -cy,  1);
 
-      // Right face (x = 1.0f)
-      glColor3f(0.5,0.337,0.157);   // Magenta
-      glVertex3f(cx,  cy, -1.0f);
-      glVertex3f(cx,  cy,  1.0f);
-      glVertex3f(cx, -cy,  1.0f);
-      glVertex3f(cx, -cy, -1.0f);
-   glEnd();  // End of drawing color-cube
+      // Right
+      glColor3f(0.5,0.337,0.157);
+      glVertex3f(cx,  cy, -1);
+      glVertex3f(cx,  cy,  1);
+      glVertex3f(cx, -cy,  1);
+      glVertex3f(cx, -cy, -1);
+   glEnd();
 }
 void pieceOfCake(){
     //glRotatef(angle,Rx,Ry,Rz);
