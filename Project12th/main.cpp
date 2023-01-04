@@ -100,7 +100,7 @@ void table(){
    glEnd();
 }
 void pieceOfCake(){
-    //glRotatef(angle,Rx,Ry,Rz);
+
     float c=0.18;
 
     // Front black
@@ -114,7 +114,7 @@ void pieceOfCake(){
 
     // Right green
     glBegin(GL_QUADS);
-      glColor3f(0.9, 0.4, 0.0);     // Red
+      glColor3f(0.9, 0.4, 0.0);
       glVertex3f(0, c, c);
       glVertex3f(c, -c, c);
       glVertex3f(c, -c, -c);
@@ -124,7 +124,7 @@ void pieceOfCake(){
 
 // Back blue
     glBegin(GL_TRIANGLES);
-      glColor3f(1,1,1);    // Red
+      glColor3f(1,1,1);
       glVertex3f(0, c, -c);
       glVertex3f(c, -c, -c);
       glVertex3f(-c, -c, -c);
@@ -133,7 +133,7 @@ void pieceOfCake(){
 
     // Left yellow
     glBegin(GL_QUADS);
-      glColor3f(0.9, 0.4, 0.0);     // Blue
+      glColor3f(0.9, 0.4, 0.0);
       glVertex3f(-c, -c, c);
       glVertex3f( 0, c, c);
       glVertex3f(0, c, -c);
@@ -155,14 +155,13 @@ void pieceOfCake(){
 void ghost(){
     glTranslated(0,0,-5);
     glColor3f(1,1,1);
-    glRotatef(angle,1,0,0);
-    //glutSolidCube(2);
+    //glRotatef(angle,1,0,0);
 
-
-
+    //head
     glutSolidSphere(1,30,30);
-
     glTranslatef(0,-1,-0.65);
+
+    //
     glPushMatrix();
     glTranslatef(0,0,-0.1);
     glutSolidCube(2);
@@ -195,7 +194,7 @@ void reshapeFunc (int w, int h)
 
 void idleFunc (void)
 {
-    //zRotated += 1;
+
     if(approach<7){
         approach+=0.08;
     }
@@ -214,11 +213,11 @@ void idleFunc (void)
 
 
 
-    //angle+=0.5;
+
     glutPostRedisplay();
 }
 //------------------------------  display   -------------------------------
-int zRotated=0;
+
 void display (void)
 {
 
@@ -233,10 +232,11 @@ void display (void)
         table();
     glPopMatrix();
 
+
     //Donuts (torus)
     glPushMatrix();
         glTranslatef(2.8,-3.5,4);
-        glTranslatef(-4.8,2.3,2);
+        glTranslatef(-4.8,2.3+Ty,2);
         donut();
     glPopMatrix();
 
@@ -251,12 +251,16 @@ void display (void)
         pieceOfCake();
     glPopMatrix();
 
+
+    //teapot
     glPushMatrix();
         glTranslatef(0.9,-0.4,10);
         glColor3f(1,1,0);
         glutSolidTeapot(0.2);
     glPopMatrix();
 
+
+    //ghost
     glPushMatrix();
         glTranslatef(away,0,approach);
         ghost();
@@ -267,10 +271,6 @@ void display (void)
 
     glutSwapBuffers();
 }
-
-//--------------------------------  idleFunc  ----------------------------------
-
-
 
 void texture (void){
 
@@ -323,14 +323,8 @@ void keyEvent(int key, int x, int y){
     }
 
 }
-/*void timer(int){
-    glutPostRedisplay();
-    glutTimerFunc(1000/60,timer,0);
 
-
-}*/
 //----------------------------------  main  ------------------------------------
-
 
 int main (int argc, char **argv)
 {
